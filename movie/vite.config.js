@@ -6,6 +6,15 @@ import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
+const moviesDataPath = path.resolve(__dirname, 'public/api/movies.json')
+
+const readMoviesData = () => {
+  if (!fs.existsSync(moviesDataPath)) {
+    return []
+  }
+
+  return JSON.parse(fs.readFileSync(moviesDataPath, 'utf-8'))
+}
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -17,6 +26,13 @@ export default defineConfig({
         server.middlewares.use((req, res, next) => {
           const urlObj = new URL(req.url, 'http://localhost');
           
+          if ((req.method === 'GET' || req.method === 'HEAD') && (urlObj.pathname === '/api/movies' || urlObj.pathname === '/api/movies.json')) {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify(readMoviesData()));
+            return;
+          }
+
           if (req.method === 'POST' && urlObj.pathname === '/api/movies') {
             let body = '';
             req.on('data', chunk => {

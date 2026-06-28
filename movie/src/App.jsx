@@ -60,7 +60,7 @@ function App() {
     const isTest = import.meta.env.MODE === 'test';
     
     const loadData = () => {
-      fetch('/api/movies.json')
+      fetch('/api/movies')
         .then((res) => {
           if (!res.ok) {
             throw new Error(`HTTP error! status: ${res.status}`);
@@ -68,7 +68,7 @@ function App() {
           return res.json();
         })
         .then((data) => {
-          setMovies(data);
+          setMovies(Array.isArray(data) ? data : []);
           setError(null);
           setIsLoading(false);
         })

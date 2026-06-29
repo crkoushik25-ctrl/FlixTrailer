@@ -1,4 +1,5 @@
-import { Search, User, LogOut, Flame } from 'lucide-react';
+import { useState } from 'react';
+import { Search, User, LogOut, Flame, Menu, X } from 'lucide-react';
 
 export default function Header({ 
   activePage, 
@@ -8,6 +9,8 @@ export default function Header({
   user, 
   onLogout 
 }) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   return (
     <header className="header">
       <div className="container header-container">
@@ -18,6 +21,7 @@ export default function Header({
           onClick={(e) => {
             e.preventDefault();
             setActivePage('home');
+            setIsMobileMenuOpen(false);
           }}
         >
           <Flame className="logo-icon" size={28} fill="currentColor" />
@@ -36,7 +40,7 @@ export default function Header({
           />
         </div>
 
-        {/* Navigation Tabs */}
+        {/* Navigation Tabs (Desktop) */}
         <nav className="nav-links">
           <span 
             className={`nav-item ${activePage === 'home' ? 'active' : ''}`}
@@ -67,7 +71,7 @@ export default function Header({
         {/* Profile / Auth Control */}
         <div className="header-right">
           {user ? (
-            <div className="user-profile" onClick={() => setActivePage('login')}>
+            <div className="user-profile" onClick={() => { setActivePage('login'); setIsMobileMenuOpen(false); }}>
               <div className="user-avatar">
                 {user.username.charAt(0).toUpperCase()}
               </div>
@@ -78,6 +82,7 @@ export default function Header({
                 onClick={(e) => {
                   e.stopPropagation();
                   onLogout();
+                  setIsMobileMenuOpen(false);
                 }}
                 title="Log Out"
               >
@@ -87,15 +92,69 @@ export default function Header({
           ) : (
             <button 
               className="btn btn-secondary" 
-              onClick={() => setActivePage('login')}
+              onClick={() => { setActivePage('login'); setIsMobileMenuOpen(false); }}
               style={{ padding: '0.5rem 1.1rem', borderRadius: '20px', fontSize: '0.85rem' }}
             >
               <User size={15} />
               Sign In
             </button>
           )}
+
+          {/* Hamburger Menu Toggle for Mobile */}
+          <button 
+            type="button"
+            className="mobile-menu-toggle"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+          >
+            {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Navigation Drawer */}
+      {isMobileMenuOpen && (
+        <div className="mobile-nav-overlay" onClick={() => setIsMobileMenuOpen(false)}>
+          <nav className="mobile-nav animate-scale" onClick={(e) => e.stopPropagation()}>
+            <span 
+              className={`mobile-nav-item ${activePage === 'home' ? 'active' : ''}`}
+              onClick={() => {
+                setActivePage('home');
+                setIsMobileMenuOpen(false);
+              }}
+            >
+              Home
+            </span>
+            <span 
+              className={`mobile-nav-item ${activePage === 'favourite' ? 'active' : ''}`}
+              onClick={() => {
+                setActivePage('favourite');
+                setIsMobileMenuOpen(false);
+              }}
+            >
+              Favourites
+            </span>
+            <span 
+              className={`mobile-nav-item ${activePage === 'watch-later' ? 'active' : ''}`}
+              onClick={() => {
+                setActivePage('watch-later');
+                setIsMobileMenuOpen(false);
+              }}
+            >
+              Watch Later
+            </span>
+            <span 
+              className={`mobile-nav-item ${activePage === 'admin' ? 'active' : ''}`}
+              onClick={() => {
+                setActivePage('admin');
+                setIsMobileMenuOpen(false);
+              }}
+            >
+              Admin
+            </span>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }

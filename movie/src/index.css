@@ -738,4 +738,110 @@ input:checked + .slider:before {
   font-size: 0.9rem;
 }
 
+/* ==========================================================================
+   Admin Panel Responsive Custom Overrides
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .admin-section {
+    padding: 1.25rem;
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-inputs-panel {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+
+  .preview-card-section {
+    padding: 1.25rem;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .admin-reorder-item {
+    flex-direction: column;
+    align-items: stretch !important;
+    gap: 0.75rem !important;
+    padding: 1rem !important;
+  }
+
+  .admin-reorder-left {
+    flex-wrap: wrap;
+    gap: 0.5rem 0.75rem !important;
+    width: 100%;
+  }
+
+  .admin-reorder-title {
+    width: 100%;
+    margin-left: 2.25rem;
+    font-size: 0.9rem !important;
+    order: 1; /* push title below index and grip line */
+  }
+
+  .admin-reorder-badge, 
+  .admin-reorder-year {
+    margin-left: 2.25rem;
+    order: 2;
+  }
+
+  .admin-reorder-right {
+    justify-content: flex-start;
+    padding-left: 2.25rem;
+    margin-top: 0.25rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 0.5rem;
+    width: calc(100% - 2.25rem);
+    margin-left: 2.25rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .autofill-search-form {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .autofill-search-btn {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+  }
+
+  .form-input-addon-wrapper {
+    flex-wrap: wrap;
+  }
+
+  .form-input-addon {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .form-input-addon-wrapper .form-input {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+
+  .admin-login-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .admin-lock-icon-wrapper {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1.25rem;
+  }
+
+  .admin-login-title {
+    font-size: 1.4rem;
+  }
+}
+
+
 

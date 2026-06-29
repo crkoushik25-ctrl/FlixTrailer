@@ -937,6 +937,7 @@ export default function AdminPanel({ onAddMovie, onDeleteMovie, onReorderMovies,
               onDragStart={(e) => handleDragStart(e, idx)}
               onDragOver={(e) => handleDragOver(e, idx)}
               onDrop={(e) => handleDrop(e, idx)}
+              className="admin-reorder-item"
               style={{ 
                 display: 'flex', 
                 alignItems: 'center', 
@@ -965,23 +966,23 @@ export default function AdminPanel({ onAddMovie, onDeleteMovie, onReorderMovies,
                 }
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+              <div className="admin-reorder-left" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <GripVertical size={16} style={{ color: 'var(--text-dim)', cursor: 'grab' }} />
                 <span style={{ fontSize: '0.9rem', color: 'var(--text-dim)', width: '24px', fontWeight: 600 }}>{idx + 1}</span>
-                <span style={{ fontSize: '0.95rem', fontWeight: 500, color: 'var(--text-main)' }}>{movie.title}</span>
-                <span style={{ fontSize: '0.7rem', textTransform: 'uppercase', background: 'rgba(6, 182, 212, 0.12)', color: 'var(--accent-neon-blue)', padding: '0.15rem 0.4rem', borderRadius: '4px', fontWeight: 700 }}>
+                <span className="admin-reorder-title" style={{ fontSize: '0.95rem', fontWeight: 500, color: 'var(--text-main)' }}>{movie.title}</span>
+                <span className="admin-reorder-badge" style={{ fontSize: '0.7rem', textTransform: 'uppercase', background: 'rgba(6, 182, 212, 0.12)', color: 'var(--accent-neon-blue)', padding: '0.15rem 0.4rem', borderRadius: '4px', fontWeight: 700 }}>
                   {CONTENT_TYPE_LABELS[movie.contentType || 'movie'] || 'Trailer'}
                 </span>
-                <span style={{ fontSize: '0.85rem', color: 'var(--text-dim)' }}>({movie.year})</span>
+                <span className="admin-reorder-year" style={{ fontSize: '0.85rem', color: 'var(--text-dim)' }}>({movie.year})</span>
               </div>
               
-              <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+              <div className="admin-reorder-right" style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
                 {movie.featured && (
-                  <span style={{ fontSize: '0.7rem', textTransform: 'uppercase', background: 'rgba(192, 132, 252, 0.15)', color: '#c084fc', padding: '0.15rem 0.4rem', borderRadius: '4px', fontWeight: 600 }}>
+                  <span className="admin-reorder-featured" style={{ fontSize: '0.7rem', textTransform: 'uppercase', background: 'rgba(192, 132, 252, 0.15)', color: '#c084fc', padding: '0.15rem 0.4rem', borderRadius: '4px', fontWeight: 600 }}>
                     Featured
                   </span>
                 )}
-                <span style={{ fontSize: '0.8rem', color: 'var(--star-color)', fontWeight: 600 }}>
+                <span style={{ fontSize: '0.85rem', color: 'var(--star-color)', fontWeight: 600 }}>
                   ⭐ {movie.rating}
                 </span>
               </div>
